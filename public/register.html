@@ -18,28 +18,16 @@
 
 <script>
 const registerBtn = document.getElementById("register-btn");
-
 registerBtn.addEventListener("click", () => {
   const username = document.getElementById("reg-username").value.trim();
   const password = document.getElementById("reg-password").value.trim();
-  const passwordConfirm = document.getElementById("reg-password-confirm").value.trim();
+  const confirm = document.getElementById("reg-password-confirm").value.trim();
 
-  if(username === "" || password === "" || passwordConfirm === "") {
-    alert("Please fill all fields!");
-    return;
-  }
-
-  if(password !== passwordConfirm) {
-    alert("Passwords do not match!");
-    return;
-  }
+  if(!username || !password || !confirm) return alert("All fields are required!");
+  if(password !== confirm) return alert("Passwords do not match!");
 
   let users = JSON.parse(localStorage.getItem("users")) || {};
-
-  if(users[username]) {
-    alert("Username already exists! Choose another.");
-    return;
-  }
+  if(users[username]) return alert("Username exists! Login or choose another.");
 
   users[username] = password;
   localStorage.setItem("users", JSON.stringify(users));
@@ -47,8 +35,8 @@ registerBtn.addEventListener("click", () => {
   window.location.href = "login.html";
 });
 
-// Optional: Enter key to submit
-document.querySelectorAll('input').forEach(input => {
+// Enter key submit
+document.querySelectorAll("input").forEach(input => {
   input.addEventListener("keypress", (e) => {
     if(e.key === "Enter") registerBtn.click();
   });
