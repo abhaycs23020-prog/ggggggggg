@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Category</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🎯 Choose a Category</h1>
+    <button class="btn" onclick="startCategory('General Knowledge')">General Knowledge</button>
+    <button class="btn" onclick="startCategory('Science')">Science</button>
+    <button class="btn" onclick="startCategory('Technology')">Technology</button>
+    <button class="btn" onclick="startCategory('History')">History</button>
+  </div>
+  <script>
+    function startCategory(category) {
+      localStorage.setItem("selectedCategory", category);
+      window.location.href = "quiz.html";
+    }
+  </script>
+</body>
+</html>
