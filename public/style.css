@@ -1,0 +1,187 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a, #9333ea);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  overflow-x: hidden;
+  animation: fadeIn 0.8s ease-in;
+}
+
+/* Main Container */
+.quiz-container {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  border-radius: 18px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: slideUp 0.8s ease-out;
+}
+
+/* Headings */
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #facc15;
+  text-shadow: 0 0 15px rgba(250, 204, 21, 0.7);
+}
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #a5f3fc;
+}
+
+/* Info Bar */
+#info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Timer Bar */
+#timer-bar {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  height: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+#timer-fill {
+  background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+  height: 100%;
+  width: 100%;
+  transition: width 1s linear;
+}
+
+/* Buttons */
+.btn {
+  display: block;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+.btn.correct {
+  background: #22c55e;
+  box-shadow: 0 0 20px #22c55e;
+}
+.btn.wrong {
+  background: #ef4444;
+  box-shadow: 0 0 20px #ef4444;
+}
+
+/* Next Button */
+#next-btn {
+  margin-top: 15px;
+  display: none;
+  background: #3b82f6;
+  font-weight: bold;
+  box-shadow: 0 0 15px #3b82f6;
+}
+#next-btn:hover {
+  background: #2563eb;
+}
+
+/* Input fields (Login/Register) */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Result Page */
+.result-box {
+  text-align: center;
+}
+.result-box h2 {
+  color: #facc15;
+  margin-bottom: 15px;
+}
+.result-box p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Leaderboard */
+#leaderboard-list {
+  list-style: none;
+  padding: 0;
+}
+#leaderboard-list li {
+  background: rgba(255,255,255,0.15);
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.2s;
+}
+#leaderboard-list li:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.25);
+}
+
+/* About Page */
+.about-box {
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.about-box h2 {
+  margin-bottom: 10px;
+  color: #fbbf24;
+}
+.about-box p {
+  margin-bottom: 8px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes slideUp {
+  from {transform: translateY(30px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
