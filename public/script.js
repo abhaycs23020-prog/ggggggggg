@@ -1,149 +1,169 @@
-// Questions organized by category and level
-const questions = {
+// ====== Questions with category + level + hints ======
+const questions = JSON.parse(localStorage.getItem("questions")) || {
   gk: {
     easy: [
-      { question: "Largest planet?", answers: [{text:"Earth",correct:false},{text:"Jupiter",correct:true},{text:"Mars",correct:false},{text:"Saturn",correct:false}] },
-      { question: "Father of Nation?", answers: [{text:"Nehru",correct:false},{text:"Gandhi",correct:true},{text:"Patel",correct:false},{text:"Ambedkar",correct:false}] }
+      { question: "Largest planet?", answers: [{text:"Earth",correct:false},{text:"Jupiter",correct:true},{text:"Mars",correct:false},{text:"Saturn",correct:false}], hint:"It's a gas giant." },
+      { question: "Father of Nation?", answers: [{text:"Nehru",correct:false},{text:"Gandhi",correct:true},{text:"Patel",correct:false},{text:"Ambedkar",correct:false}], hint:"His surname is Gandhi." }
     ],
     medium: [
-      { question: "National animal of India?", answers: [{text:"Lion",correct:false},{text:"Tiger",correct:true},{text:"Elephant",correct:false},{text:"Leopard",correct:false}] },
-      { question: "Pink City?", answers: [{text:"Jaipur",correct:true},{text:"Jodhpur",correct:false},{text:"Udaipur",correct:false},{text:"Delhi",correct:false}] }
+      { question: "National animal of India?", answers: [{text:"Lion",correct:false},{text:"Tiger",correct:true},{text:"Elephant",correct:false},{text:"Leopard",correct:false}], hint:"It is a big cat." }
     ],
     hard: [
-      { question: "National Anthem author?", answers: [{text:"Tagore",correct:true},{text:"Chatterjee",correct:false},{text:"Naidu",correct:false},{text:"Gandhi",correct:false}] }
+      { question: "National Anthem author?", answers: [{text:"Tagore",correct:true},{text:"Chatterjee",correct:false},{text:"Naidu",correct:false},{text:"Gandhi",correct:false}], hint:"He wrote 'Jana Gana Mana'." }
     ]
   },
   science: {
     easy: [
-      { question:"Chemical symbol for water?", answers:[{text:"H2O",correct:true},{text:"O2",correct:false},{text:"CO2",correct:false},{text:"HO2",correct:false}] },
-      { question:"Gas plants absorb?", answers:[{text:"Oxygen",correct:false},{text:"Carbon Dioxide",correct:true},{text:"Nitrogen",correct:false},{text:"Hydrogen",correct:false}] }
+      { question:"Chemical symbol for water?", answers:[{text:"H2O",correct:true},{text:"O2",correct:false},{text:"CO2",correct:false},{text:"HO2",correct:false}], hint:"2 hydrogen + 1 oxygen" }
     ],
     medium: [
-      { question:"Bones in adult human?", answers:[{text:"206",correct:true},{text:"210",correct:false},{text:"198",correct:false},{text:"250",correct:false}] },
-      { question:"Cell part with genetic material?", answers:[{text:"Nucleus",correct:true},{text:"Mitochondria",correct:false},{text:"Cytoplasm",correct:false},{text:"Ribosome",correct:false}] }
+      { question:"Bones in adult human?", answers:[{text:"206",correct:true},{text:"210",correct:false},{text:"198",correct:false},{text:"250",correct:false}], hint:"It's just over 200." }
     ],
     hard: [
-      { question:"Red planet?", answers:[{text:"Mars",correct:true},{text:"Venus",correct:false},{text:"Mercury",correct:false},{text:"Saturn",correct:false}] }
+      { question:"Red planet?", answers:[{text:"Mars",correct:true},{text:"Venus",correct:false},{text:"Mercury",correct:false},{text:"Saturn",correct:false}], hint:"Named after Roman god of war." }
     ]
   },
   tech: {
     easy: [
-      { question:"Who founded Microsoft?", answers:[{text:"Steve Jobs",correct:false},{text:"Bill Gates",correct:true},{text:"Mark Zuckerberg",correct:false},{text:"Elon Musk",correct:false}] },
-      { question:"What does HTML stand for?", answers:[{text:"Hyper Text Markup Language",correct:true},{text:"Hyper Trainer Marking Language",correct:false},{text:"High Text Machine Language",correct:false},{text:"Hyper Tabular Markup Language",correct:false}] }
+      { question:"Who founded Microsoft?", answers:[{text:"Steve Jobs",correct:false},{text:"Bill Gates",correct:true},{text:"Mark Zuckerberg",correct:false},{text:"Elon Musk",correct:false}], hint:"He is billionaire." }
     ],
     medium: [
-      { question:"Which company developed iPhone?", answers:[{text:"Apple",correct:true},{text:"Samsung",correct:false},{text:"Google",correct:false},{text:"Microsoft",correct:false}] },
-      { question:"CPU stands for?", answers:[{text:"Central Processing Unit",correct:true},{text:"Computer Processing Unit",correct:false},{text:"Central Performance Unit",correct:false},{text:"Control Processing Unit",correct:false}] }
+      { question:"What does HTML stand for?", answers:[{text:"Hyper Text Markup Language",correct:true},{text:"Hyper Trainer Marking Language",correct:false},{text:"High Text Machine Language",correct:false},{text:"Hyper Tabular Markup Language",correct:false}], hint:"It structures webpages." }
     ],
     hard: [
-      { question:"Who founded Facebook?", answers:[{text:"Mark Zuckerberg",correct:true},{text:"Larry Page",correct:false},{text:"Elon Musk",correct:false},{text:"Jeff Bezos",correct:false}] }
+      { question:"Who founded Facebook?", answers:[{text:"Mark Zuckerberg",correct:true},{text:"Larry Page",correct:false},{text:"Elon Musk",correct:false},{text:"Jeff Bezos",correct:false}], hint:"He created it at Harvard." }
     ]
   },
   history: {
     easy: [
-      { question:"First US President?", answers:[{text:"Abraham Lincoln",correct:false},{text:"George Washington",correct:true},{text:"Thomas Jefferson",correct:false},{text:"John Adams",correct:false}] },
-      { question:"World War II ended in?", answers:[{text:"1945",correct:true},{text:"1939",correct:false},{text:"1918",correct:false},{text:"1950",correct:false}] }
+      { question:"First US President?", answers:[{text:"George Washington",correct:true},{text:"Abraham Lincoln",correct:false}], hint:"Led Revolutionary War." }
     ],
     medium: [
-      { question:"Who built Taj Mahal?", answers:[{text:"Akbar",correct:false},{text:"Shah Jahan",correct:true},{text:"Aurangzeb",correct:false},{text:"Humayun",correct:false}] },
-      { question:"First Maurya emperor?", answers:[{text:"Ashoka",correct:false},{text:"Chandragupta Maurya",correct:true},{text:"Bindusara",correct:false},{text:"Harsha",correct:false}] }
+      { question:"Who built Taj Mahal?", answers:[{text:"Shah Jahan",correct:true},{text:"Akbar",correct:false},{text:"Aurangzeb",correct:false},{text:"Humayun",correct:false}], hint:"He was Mughal emperor." }
     ],
     hard: [
-      { question:"India gained independence?", answers:[{text:"1947",correct:true},{text:"1950",correct:false},{text:"1930",correct:false},{text:"1942",correct:false}] }
+      { question:"India gained independence?", answers:[{text:"1947",correct:true},{text:"1950",correct:false},{text:"1930",correct:false},{text:"1942",correct:false}], hint:"Year after WWII ended." }
     ]
   }
 };
 
-// Get category & level from localStorage
-let currentCategory = localStorage.getItem("selectedCategory") || "gk";
-let currentLevel = localStorage.getItem("selectedLevel") || "easy";
-
-// Grab questions for selected category & level
-let currentQuestions = questions[currentCategory][currentLevel];
-let currentQuestionIndex = 0;
-let score = 0;
-
-// DOM elements
+// ====== DOM Elements ======
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
-const timerFill = document.getElementById("timer-fill");
+const hintBtn = document.getElementById("hint-btn");
+const hintText = document.getElementById("hint-text");
+const scoreDisplay = document.getElementById("score");
+const progressFill = document.getElementById("progress-fill");
+const retryBtn = document.getElementById("retry-btn");
+const modeBtn = document.getElementById("mode-btn");
 
-// Show question
+// ====== Category & Level ======
+let currentCategory = localStorage.getItem("selectedCategory") || "gk";
+let currentLevel = localStorage.getItem("selectedLevel") || "easy";
+
+// ====== Quiz State ======
+let currentQuestions = [...questions[currentCategory][currentLevel]]; // copy array
+currentQuestions.sort(()=>Math.random()-0.5); // randomize questions
+let currentQuestionIndex = 0;
+let score = 0;
+let timer, timeLeft;
+
+// ====== Show Question ======
 function showQuestion() {
   resetState();
-  const currentQuestion = currentQuestions[currentQuestionIndex];
-  questionElement.innerText = currentQuestion.question;
-
-  currentQuestion.answers.forEach(answer => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    button.classList.add("btn");
-    if(answer.correct) button.dataset.correct = true;
-    button.addEventListener("click", selectAnswer);
-    answerButtons.appendChild(button);
+  const q = currentQuestions[currentQuestionIndex];
+  questionElement.innerText = q.question;
+  const shuffledAnswers = [...q.answers].sort(()=>Math.random()-0.5);
+  shuffledAnswers.forEach(answer=>{
+    const btn = document.createElement("button");
+    btn.innerText = answer.text;
+    btn.classList.add("btn");
+    if(answer.correct) btn.dataset.correct = true;
+    btn.addEventListener("click", selectAnswer);
+    answerButtons.appendChild(btn);
   });
+  progressFill.style.width = ((currentQuestionIndex)/currentQuestions.length)*100 + "%";
+  startTimer();
+  hintText.style.display = "none";
 }
 
-// Reset state
+// ====== Reset State ======
 function resetState() {
   nextButton.style.display = "none";
   while(answerButtons.firstChild) answerButtons.removeChild(answerButtons.firstChild);
-  resetTimer();
+  clearInterval(timer);
 }
 
-// Select answer
-function selectAnswer(e) {
+// ====== Select Answer ======
+function selectAnswer(e){
+  clearInterval(timer);
   const selectedBtn = e.target;
   const isCorrect = selectedBtn.dataset.correct === "true";
-
-  if(isCorrect){ selectedBtn.classList.add("correct"); score++; }
+  if(isCorrect) { selectedBtn.classList.add("correct"); score++; }
   else { selectedBtn.classList.add("wrong"); }
-
-  Array.from(answerButtons.children).forEach(btn => btn.disabled = true);
+  Array.from(answerButtons.children).forEach(btn=>btn.disabled = true);
   nextButton.style.display = "block";
-  document.getElementById("score").innerText = "Score: " + score;
+  scoreDisplay.innerText = "Score: " + score;
 }
 
-// Next button
-nextButton.addEventListener("click", handleNext);
+// ====== Hint Button ======
+hintBtn.addEventListener("click", ()=>{
+  const hint = currentQuestions[currentQuestionIndex].hint;
+  if(hint){
+    hintText.innerText = hint;
+    hintText.style.display = "block";
+    score = score>0 ? score-1 : 0; // reduce 1 point
+    scoreDisplay.innerText = "Score: " + score;
+  }
+});
 
-function handleNext() {
+// ====== Next Button ======
+nextButton.addEventListener("click", ()=>{
   currentQuestionIndex++;
   if(currentQuestionIndex < currentQuestions.length) showQuestion();
   else showScore();
+});
+
+// ====== Timer ======
+function startTimer() {
+  timeLeft = 15;
+  timerFill.style.width = "100%";
+  timer = setInterval(()=>{
+    timeLeft--;
+    timerFill.style.width = (timeLeft/15*100) + "%";
+    if(timeLeft<=0){
+      clearInterval(timer);
+      currentQuestionIndex++;
+      if(currentQuestionIndex < currentQuestions.length) showQuestion();
+      else showScore();
+    }
+  },1000);
 }
 
-// Show final score
-function showScore() {
+// ====== Show Score & Leaderboard ======
+function showScore(){
   let currentUser = localStorage.getItem("currentUser") || "Guest";
   let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
   leaderboard.push({user:currentUser, score:score});
   leaderboard.sort((a,b)=>b.score-a.score);
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
   localStorage.setItem("lastScore", score);
-  window.location.href = "result.html";
+  alert("Quiz Complete! Your Score: " + score);
 }
 
-// Timer
-let timer, timeLeft;
-function startTimer() {
-  timeLeft = 15;
-  timerFill.style.width = "100%";
-  timer = setInterval(() => {
-    timeLeft--;
-    timerFill.style.width = (timeLeft/15*100) + "%";
-    if(timeLeft <= 0){
-      clearInterval(timer);
-      handleNext();
-    }
-  }, 1000);
-}
+// ====== Retry Quiz ======
+retryBtn.addEventListener("click", ()=>{
+  currentQuestionIndex = 0;
+  score = 0;
+  currentQuestions = [...questions[currentCategory][currentLevel]].sort(()=>Math.random()-0.5);
+  showQuestion();
+});
 
-function resetTimer() {
-  clearInterval(timer);
-  startTimer();
-}
+// ====== Dark / Light Mode ======
+modeBtn.addEventListener("click", ()=>{
+  document.body.classList.toggle("light-mode");
+});
 
-// Start quiz
-if(currentQuestions.length > 0) showQuestion();
+// ====== Start Quiz ======
+if(currentQuestions.length>0) showQuestion();
