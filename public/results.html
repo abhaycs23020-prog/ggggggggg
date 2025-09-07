@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Results</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -14,21 +14,29 @@
   </div>
 
   <script>
-    const gameData = JSON.parse(localStorage.getItem('gameData'));
     const resultsDiv = document.getElementById('results');
 
-    gameData.forEach(item => {
-      if(item.type === 'drawing') {
-        const img = document.createElement('img');
-        img.src = item.data;
-        img.width = 200;
-        resultsDiv.appendChild(img);
-      } else {
-        const p = document.createElement('p');
-        p.textContent = `Guess: ${item.data}`;
-        resultsDiv.appendChild(p);
-      }
-    });
+    // Fetch data from backend API (MongoDB)
+    fetch('/api/results')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(item => {
+          if (item.type === 'drawing') {
+            const img = document.createElement('img');
+            img.src = item.data;
+            img.width = 200;
+            resultsDiv.appendChild(img);
+          } else {
+            const p = document.createElement('p');
+            p.textContent = `Guess: ${item.data}`;
+            resultsDiv.appendChild(p);
+          }
+        });
+      })
+      .catch(err => {
+        resultsDiv.innerHTML = '<p style="color:red;">❌ Error loading results</p>';
+        console.error(err);
+      });
   </script>
 </body>
 </html>
