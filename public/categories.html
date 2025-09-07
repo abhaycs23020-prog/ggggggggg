@@ -19,7 +19,7 @@
     document.querySelectorAll(".category-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         localStorage.setItem("selectedCategory", e.target.dataset.cat);
-        window.location.href = "quiz.html";
+        window.location.href = "levels.html"; // redirect to level selection page
       });
     });
   </script>
