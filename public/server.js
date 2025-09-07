@@ -1,55 +1,48 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// MongoDB connect
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
-  console.log('✅ MongoDB connected');
-}).catch(err => {
-  console.error('❌ MongoDB connection error:', err);
-});
+}).then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.log("❌ MongoDB Error:", err));
 
-// Data schema (example)
+// Schema
 const Drawing = mongoose.model('Drawing', {
   player: String,
-  type: String, // 'drawing' or 'guess'
-  data: String  // base64 image or text
+  type: String,
+  data: String
 });
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// API to save data
+// Save game data
 app.post('/api/save', async (req, res) => {
   try {
-    const payload = req.body; // array of {player, type, data}
-    await Drawing.insertMany(payload);
-    res.status(200).send({ message: 'Saved successfully' });
+    await Drawing.insertMany(req.body);
+    res.status(200).send({ message: "Saved successfully" });
   } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Failed to save' });
+    res.status(500).send({ error: "Failed to save" });
   }
 });
 
-// API to fetch all results
+// Get results
 app.get('/api/results', async (req, res) => {
-  const drawings = await Drawing.find({});
-  res.json(drawings);
+  const results = await Drawing.find({});
+  res.json(results);
 });
 
-// Serve homepage
+// Root route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
