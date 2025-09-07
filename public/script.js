@@ -12,9 +12,22 @@ const questions = {
     { question:"Bones in adult human?", answers:[{text:"206",correct:true},{text:"210",correct:false},{text:"198",correct:false},{text:"250",correct:false}] },
     { question:"Cell part with genetic material?", answers:[{text:"Nucleus",correct:true},{text:"Mitochondria",correct:false},{text:"Cytoplasm",correct:false},{text:"Ribosome",correct:false}] },
     { question:"Red planet?", answers:[{text:"Mars",correct:true},{text:"Venus",correct:false},{text:"Mercury",correct:false},{text:"Saturn",correct:false}] }
+  ],
+  tech: [
+    { question:"Who founded Microsoft?", answers:[{text:"Steve Jobs",correct:false},{text:"Bill Gates",correct:true},{text:"Mark Zuckerberg",correct:false},{text:"Elon Musk",correct:false}] },
+    { question:"What does HTML stand for?", answers:[{text:"Hyper Trainer Marking Language",correct:false},{text:"Hyper Text Markup Language",correct:true},{text:"High Text Machine Language",correct:false},{text:"Hyper Tabular Markup Language",correct:false}] },
+    { question:"Which company developed iPhone?", answers:[{text:"Apple",correct:true},{text:"Samsung",correct:false},{text:"Google",correct:false},{text:"Microsoft",correct:false}] },
+    { question:"CPU stands for?", answers:[{text:"Central Processing Unit",correct:true},{text:"Computer Processing Unit",correct:false},{text:"Central Performance Unit",correct:false},{text:"Control Processing Unit",correct:false}] },
+    { question:"Who founded Facebook?", answers:[{text:"Mark Zuckerberg",correct:true},{text:"Larry Page",correct:false},{text:"Elon Musk",correct:false},{text:"Jeff Bezos",correct:false}] }
+  ],
+  history: [
+    { question:"First US President?", answers:[{text:"Abraham Lincoln",correct:false},{text:"George Washington",correct:true},{text:"Thomas Jefferson",correct:false},{text:"John Adams",correct:false}] },
+    { question:"World War II ended in?", answers:[{text:"1945",correct:true},{text:"1939",correct:false},{text:"1918",correct:false},{text:"1950",correct:false}] },
+    { question:"Who built Taj Mahal?", answers:[{text:"Akbar",correct:false},{text:"Shah Jahan",correct:true},{text:"Aurangzeb",correct:false},{text:"Humayun",correct:false}] },
+    { question:"First Maurya emperor?", answers:[{text:"Ashoka",correct:false},{text:"Chandragupta Maurya",correct:true},{text:"Bindusara",correct:false},{text:"Harsha",correct:false}] },
+    { question:"India gained independence?", answers:[{text:"1947",correct:true},{text:"1950",correct:false},{text:"1930",correct:false},{text:"1942",correct:false}] }
   ]
 };
-
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
