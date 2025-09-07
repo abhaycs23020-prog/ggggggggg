@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Quiz Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="quiz-container">
+  <h1>Register Account</h1>
+  <input type="text" id="reg-username" placeholder="Enter your username">
+  <input type="password" id="reg-password" placeholder="Enter your password">
+  <input type="password" id="reg-password-confirm" placeholder="Confirm password">
+  <button class="btn" id="register-btn">Register</button>
+  <p>Already have an account? <a href="login.html">Login here</a></p>
+</div>
+
+<script>
+const registerBtn = document.getElementById("register-btn");
+
+registerBtn.addEventListener("click", () => {
+  const username = document.getElementById("reg-username").value.trim();
+  const password = document.getElementById("reg-password").value.trim();
+  const passwordConfirm = document.getElementById("reg-password-confirm").value.trim();
+
+  if(username === "" || password === "" || passwordConfirm === "") {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  if(password !== passwordConfirm) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if(users[username]) {
+    alert("Username already exists! Choose another.");
+    return;
+  }
+
+  users[username] = password;
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Registration successful! Please login.");
+  window.location.href = "login.html";
+});
+
+// Optional: Enter key to submit
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener("keypress", (e) => {
+    if(e.key === "Enter") registerBtn.click();
+  });
+});
+</script>
+</body>
+</html>
