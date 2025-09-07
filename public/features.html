@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Quiz Features</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz-container features-box">
+    <h1>Advanced Quiz Features</h1>
+
+    <h2 id="category-name">Category: </h2>
+    <h2 id="level-name">Level: </h2>
+
+    <div id="question"></div>
+    <div id="answer-buttons"></div>
+
+    <button class="btn" id="hint-btn">Hint</button>
+    <p id="hint-text" style="display:none; color:#ffeb3b;"></p>
+
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
+
+    <span id="score">Score: 0</span>
+    <button class="btn" id="next-btn">Next</button>
+
+    <h2>Leaderboard</h2>
+    <ul id="leaderboard-list"></ul>
+
+    <button class="btn" id="retry-btn">Retry Quiz</button>
+    <button class="btn" id="mode-btn">Toggle Dark / Light Mode</button>
+    <button class="btn" onclick="window.location.href='login.html'">Home</button>
+  </div>
+
+<script>
+  // ====== Dark/Light Mode ======
+  const modeBtn = document.getElementById("mode-btn");
+  modeBtn.addEventListener("click", ()=>{
+    document.body.classList.toggle("light-mode");
+  });
+
+  // ====== Category & Level ======
+  let currentCategory = localStorage.getItem("selectedCategory") || "gk";
+  let currentLevel = localStorage.getItem("selectedLevel") || "easy";
+  document.getElementById("category-name").innerText = "Category: " + currentCategory.toUpperCase();
+  document.getElementById("level-name").innerText = "Level: " + currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1);
+
+  // ====== Questions & Answers ======
+  const questions = JSON.parse(localStorage.getItem("questions")) || {
+    gk: [
+      {question:"Largest planet?", answers:[{text:"Earth",correct:false},{text:"Jupiter",correct:true},{text:"Mars",correct:false},{text:"Saturn",correct:false}], hint:"It's a gas giant."},
+      {question:"Father of Nation?", answers:[{text:"Nehru",correct:false},{text:"Gandhi",correct:true},{text:"Patel",correct:false},{text:"Ambedkar",correct:false}], hint:"His surname is Gandhi."}
+    ]
+    // Add other categories similarly
+  };
+
+  let currentQuestions = questions[currentCategory];
+  currentQuestions.sort(()=>Math.random()-0.5); // Randomize questions
+
+  const questionElement = document.getElementById("question");
+  const answerButtons = document.getElementById("answer-buttons");
+  const nextButton = document.getElementById("next-btn");
+  const hintBtn = document.getElementById("hint-btn");
+  const hintText = document.getElementById("hint-text");
+  const progressFill = document.getElementById("progress-fill");
+  const scoreDisplay = document.getElementById("score");
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  // ====== Show Question ======
+  function showQuestion() {
+    resetState();
+    let q = currentQuestions[currentQuestionIndex];
+    questionElement.innerText = q.question;
+    q.answers.sort(()=>Math.random()-0.5); // Randomize answers
+    q.answers.forEach(answer=>{
+      const btn = document.createElement("button");
+      btn.innerText = answer.text;
+      btn.classList.add("btn");
+      if(answer.correct) btn.dataset.correct = true;
+      btn.addEventListener("click", selectAnswer);
+      answerButtons.appendChild(btn);
+    });
+    progressFill.style.width = ((currentQuestionIndex)/currentQuestions.length)*100 + "%";
+  }
+
+  function resetState() {
+    while(answerButtons.firstChild) answerButtons.removeChild(answerButtons.firstChild);
+    hintText.style.display = "none";
+    nextButton.style.display = "none";
+  }
+
+  // ====== Select Answer ======
+  function selectAnswer(e){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    if(isCorrect) { selectedBtn.classList.add("correct"); score++; }
+    else selectedBtn.classList.add("wrong");
+    Array.from(answerButtons.children).forEach(btn=>btn.disabled = true);
+    nextButton.style.display = "block";
+    scoreDisplay.innerText = "Score: " + score;
+  }
+
+  // ====== Hint Button ======
+  hintBtn.addEventListener("click", ()=>{
+    let hint = currentQuestions[currentQuestionIndex].hint;
+    if(hint){
+      hintText.innerText = hint;
+      hintText.style.display = "block";
+      score = score>0 ? score-1 : 0;
+      scoreDisplay.innerText = "Score: " + score;
+    }
+  });
+
+  // ====== Next Button ======
+  nextButton.addEventListener("click", ()=>{
+    currentQuestionIndex++;
+    if(currentQuestionIndex < currentQuestions.length) showQuestion();
+    else showScore();
+  });
+
+  // ====== Show Score & Leaderboard ======
+  const leaderboardList = document.getElementById("leaderboard-list");
+  function showScore(){
+    let currentUser = localStorage.getItem("currentUser") || "Guest";
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push({user:currentUser,score:score});
+    leaderboard.sort((a,b)=>b.score-a.score);
+    localStorage.setItem("leaderboard",JSON.stringify(leaderboard));
+    leaderboardList.innerHTML = leaderboard.map(item=>`<li>${item.user}: ${item.score}</li>`).join("");
+    alert("Quiz Complete! Your Score: " + score);
+  }
+
+  // ====== Retry Quiz ======
+  document.getElementById("retry-btn").addEventListener("click", ()=>{
+    currentQuestionIndex = 0;
+    score = 0;
+    showQuestion();
+  });
+
+  // ====== Start Quiz ======
+  if(currentQuestions.length>0) showQuestion();
+</script>
+</body>
+</html>
