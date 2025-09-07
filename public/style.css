@@ -17,7 +17,7 @@ body {
   animation: fadeIn 0.8s ease-in;
 }
 
-/* Main Container */
+/* Quiz container */
 .quiz-container {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(15px);
@@ -41,13 +41,8 @@ h2 {
   margin-bottom: 15px;
   font-size: 1.4rem;
 }
-h3 {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #a5f3fc;
-}
 
-/* Info Bar */
+/* Info bar */
 #info {
   display: flex;
   justify-content: space-between;
@@ -55,7 +50,7 @@ h3 {
   margin-bottom: 15px;
 }
 
-/* Timer Bar */
+/* Timer bar */
 #timer-bar {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
@@ -101,7 +96,7 @@ h3 {
   box-shadow: 0 0 20px #ef4444;
 }
 
-/* Next Button */
+/* Next button */
 #next-btn {
   margin-top: 15px;
   display: none;
@@ -113,11 +108,11 @@ h3 {
   background: #2563eb;
 }
 
-/* Input fields (Login/Register) */
+/* Input fields */
 input {
   width: 100%;
   padding: 12px;
-  margin: 8px 0;
+  margin: 12px 0;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -129,50 +124,31 @@ input::placeholder {
   color: rgba(255,255,255,0.7);
 }
 
-/* Result Page */
-.result-box {
-  text-align: center;
-}
-.result-box h2 {
-  color: #facc15;
-  margin-bottom: 15px;
-}
-.result-box p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-/* Leaderboard */
+/* List for leaderboard */
 #leaderboard-list {
   list-style: none;
   padding: 0;
+  margin: 10px 0;
 }
 #leaderboard-list li {
-  background: rgba(255,255,255,0.15);
-  margin: 8px 0;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 1rem;
-  display: flex;
-  justify-content: space-between;
-  transition: transform 0.2s;
-}
-#leaderboard-list li:hover {
-  transform: scale(1.03);
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 6px 0;
+  font-weight: 500;
 }
 
-/* About Page */
-.about-box {
+/* Result box */
+.result-box {
+  animation: popIn 0.5s ease-in-out;
+}
+
+/* About box */
+.about-box ul {
   text-align: left;
-  font-size: 1rem;
-  line-height: 1.6;
+  margin: 10px 0 20px 0;
 }
-.about-box h2 {
-  margin-bottom: 10px;
-  color: #fbbf24;
-}
-.about-box p {
+.about-box li {
   margin-bottom: 8px;
 }
 
@@ -184,4 +160,24 @@ input::placeholder {
 @keyframes slideUp {
   from {transform: translateY(30px); opacity: 0;}
   to {transform: translateY(0); opacity: 1;}
+}
+@keyframes popIn {
+  from {transform: scale(0.8); opacity:0;}
+  to {transform: scale(1); opacity:1;}
+}
+
+/* Responsive design */
+@media(max-width:500px){
+  .quiz-container{
+    padding:20px;
+  }
+  h1{
+    font-size:1.6rem;
+  }
+  h2{
+    font-size:1.2rem;
+  }
+  .btn{
+    font-size:14px;
+  }
 }
