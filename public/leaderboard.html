@@ -8,17 +8,17 @@
 </head>
 <body>
   <div class="quiz-container">
-    <h1>🏆 Leaderboard</h1>
-    <ol id="leaderboard-list"></ol>
-    <a href="index.html" class="btn">Back to Home</a>
+    <h1>Leaderboard</h1>
+    <ul id="leaderboard-list"></ul>
+    <button class="btn" onclick="window.location.href='index.html'">Go Home</button>
   </div>
+
   <script>
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     const list = document.getElementById("leaderboard-list");
-    leaderboard.sort((a,b) => b.score - a.score);
-    leaderboard.forEach(player => {
-      let li = document.createElement("li");
-      li.innerText = `${player.user} - ${player.score}`;
+    leaderboard.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.user} - ${item.score}`;
       list.appendChild(li);
     });
   </script>
