@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Game - Login</title>
+  <title>Quiz Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="quiz-container">
-    <h1>⚡ Quiz Game Login</h1>
-    <input type="text" id="username" placeholder="Enter Username">
-    <input type="password" id="password" placeholder="Enter Password">
-    <button class="btn" onclick="login()">Login</button>
-    <button class="btn" onclick="register()">Register</button>
+    <h1>Welcome to Quiz Game</h1>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button class="btn" id="start-btn">Start Quiz</button>
   </div>
-  <script src="users.js"></script>
+
+  <script>
+    document.getElementById("start-btn").addEventListener("click", () => {
+      const username = document.getElementById("username").value.trim();
+      if(username === "") {
+        alert("Please enter your name");
+        return;
+      }
+      localStorage.setItem("currentUser", username);
+      window.location.href = "categories.html";
+    });
+  </script>
 </body>
 </html>
