@@ -1,97 +1,94 @@
+/* ====== Global Styles ====== */
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Modern gradient background */
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
+  color: #333;
 }
 
+/* ====== Quiz Container ====== */
 .quiz-container {
-  background: #fff;
-  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.95); /* Slightly transparent */
+  padding: 30px 40px;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   width: 400px;
   max-width: 90%;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .quiz-container:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
 
-.hidden {
-  display: none;
+/* ====== Headings ====== */
+.quiz-container h1 {
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #444;
 }
 
+.quiz-container h2 {
+  font-size: 1.3em;
+  margin: 10px 0;
+  color: #555;
+}
+
+/* ====== Buttons ====== */
 button {
-  margin-top: 12px;
+  margin-top: 15px;
   padding: 12px 20px;
   border: none;
-  background: #4CAF50;
+  background: #4caf50;
   color: #fff;
+  font-size: 1em;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background: #45a049;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
+/* ====== Option Buttons ====== */
 #options button {
   display: block;
   width: 100%;
   margin: 8px 0;
-  background: #eee;
+  background: #f0f0f0;
   color: #333;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 15px;
-  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #options button:hover {
-  background: #ddd;
-  transform: scale(1.03);
+  background: #e0e0e0;
 }
 
-.correct {
-  background: #4CAF50 !important;
-  color: #fff;
-}
-
-.wrong {
-  background: #f44336 !important;
-  color: #fff;
-}
-
+/* ====== Timer Bar ====== */
 #timer-bar {
-  margin: 15px 0;
-  height: 20px;
+  width: 100%;
+  height: 10px;
   background: #ddd;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin: 15px 0;
   overflow: hidden;
 }
 
 #timer-fill {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #FF5252, #FFB74D);
+  background: #4caf50;
   transition: width 1s linear;
 }
 
-#timer {
-  font-weight: bold;
-  margin-top: 8px;
-  color: #ff4444;
-}
-
+/* ====== Score / Info ====== */
 #info {
   display: flex;
   justify-content: space-between;
@@ -99,18 +96,25 @@ button:hover {
   font-weight: bold;
 }
 
-@media (max-width: 500px) {
-  .quiz-container {
-    padding: 20px 15px;
-  }
+/* ====== Input Fields ====== */
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
 
-  button {
-    font-size: 14px;
-    padding: 10px 15px;
-  }
+/* ====== Small Text Links ====== */
+.quiz-container p a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-  #options button {
-    font-size: 14px;
-    padding: 8px;
-  }
+.quiz-container p a:hover {
+  text-decoration: underline;
 }
