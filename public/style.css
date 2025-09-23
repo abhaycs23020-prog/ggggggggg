@@ -1,25 +1,37 @@
-/* ====== Global Styles ====== */
+/* ===== Global Styles ===== */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Modern gradient background */
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   color: #333;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* ====== Quiz Container ====== */
+/* ===== Dark Mode ===== */
+body.dark-mode {
+  background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
+  color: #e0e0e0;
+}
+
+/* ===== Quiz Container ===== */
 .quiz-container {
-  background: rgba(255, 255, 255, 0.95); /* Slightly transparent */
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px 40px;
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   width: 400px;
   max-width: 90%;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+}
+
+body.dark-mode .quiz-container {
+  background: rgba(40,40,40,0.95);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
 }
 
 .quiz-container:hover {
@@ -27,20 +39,18 @@ body {
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
 
-/* ====== Headings ====== */
+/* ===== Headings ===== */
 .quiz-container h1 {
   font-size: 2em;
   margin-bottom: 15px;
-  color: #444;
 }
 
 .quiz-container h2 {
   font-size: 1.3em;
   margin: 10px 0;
-  color: #555;
 }
 
-/* ====== Buttons ====== */
+/* ===== Buttons ===== */
 button {
   margin-top: 15px;
   padding: 12px 20px;
@@ -58,7 +68,16 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* ====== Option Buttons ====== */
+body.dark-mode button {
+  background: #bb86fc;
+  color: #121212;
+}
+
+body.dark-mode button:hover {
+  background: #9f6ff5;
+}
+
+/* ===== Option Buttons ===== */
 #options button {
   display: block;
   width: 100%;
@@ -71,7 +90,16 @@ button:hover {
   background: #e0e0e0;
 }
 
-/* ====== Timer Bar ====== */
+body.dark-mode #options button {
+  background: #333;
+  color: #fff;
+}
+
+body.dark-mode #options button:hover {
+  background: #444;
+}
+
+/* ===== Timer Bar ===== */
 #timer-bar {
   width: 100%;
   height: 10px;
@@ -88,7 +116,11 @@ button:hover {
   transition: width 1s linear;
 }
 
-/* ====== Score / Info ====== */
+body.dark-mode #timer-fill {
+  background: #bb86fc;
+}
+
+/* ===== Info Section ===== */
 #info {
   display: flex;
   justify-content: space-between;
@@ -96,10 +128,8 @@ button:hover {
   font-weight: bold;
 }
 
-/* ====== Input Fields ====== */
-input[type="text"],
-input[type="password"],
-select {
+/* ===== Input Fields ===== */
+input[type="text"], input[type="password"], select {
   width: 100%;
   padding: 10px 12px;
   margin: 10px 0;
@@ -108,7 +138,15 @@ select {
   font-size: 1em;
 }
 
-/* ====== Small Text Links ====== */
+body.dark-mode input[type="text"], 
+body.dark-mode input[type="password"], 
+body.dark-mode select {
+  background: #333;
+  border: 1px solid #555;
+  color: #fff;
+}
+
+/* ===== Links ===== */
 .quiz-container p a {
   color: #4caf50;
   text-decoration: none;
@@ -117,4 +155,13 @@ select {
 
 .quiz-container p a:hover {
   text-decoration: underline;
+}
+
+body.dark-mode .quiz-container p a {
+  color: #bb86fc;
+}
+
+/* ===== Hidden Class ===== */
+.hidden {
+  display: none;
 }
