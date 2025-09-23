@@ -98,4 +98,21 @@ function endQuiz() {
 
 // ================== Leaderboard ==================
 function saveToLeaderboard(name, score, bonus, total) {
-  let leaderboard = JSON.parse(localStorage
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  leaderboard.push({name, score, bonus, total});
+  leaderboard.sort((a,b)=>b.total-a.total);
+  leaderboard = leaderboard.slice(0,5);
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
+
+function displayLeaderboard() {
+  const list = document.getElementById("leaderboard");
+  if(!list) return;
+  const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  list.innerHTML = "";
+  leaderboard.forEach(entry=>{
+    const li = document.createElement("li");
+    li.innerText = `${entry.name} - Score:${entry.score}, Bonus:${entry.bonus}, Total:${entry.total}`;
+    list.appendChild(li);
+  });
+}
