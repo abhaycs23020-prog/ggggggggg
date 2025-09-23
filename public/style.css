@@ -1,19 +1,26 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .quiz-container {
   background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 25px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   width: 400px;
+  max-width: 90%;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.quiz-container:hover {
+  transform: translateY(-5px);
 }
 
 .hidden {
@@ -21,33 +28,89 @@ body {
 }
 
 button {
-  margin-top: 10px;
-  padding: 10px 15px;
+  margin-top: 12px;
+  padding: 12px 20px;
   border: none;
   background: #4CAF50;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background: #45a049;
+  transform: scale(1.05);
 }
 
 #options button {
   display: block;
   width: 100%;
-  margin: 5px 0;
-  background: #ddd;
-  color: #000;
+  margin: 8px 0;
+  background: #eee;
+  color: #333;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 15px;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #options button:hover {
-  background: #bbb;
+  background: #ddd;
+  transform: scale(1.03);
+}
+
+.correct {
+  background: #4CAF50 !important;
+  color: #fff;
+}
+
+.wrong {
+  background: #f44336 !important;
+  color: #fff;
+}
+
+#timer-bar {
+  margin: 15px 0;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#timer-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #FF5252, #FFB74D);
+  transition: width 1s linear;
 }
 
 #timer {
-  margin-top: 10px;
   font-weight: bold;
-  color: red;
+  margin-top: 8px;
+  color: #ff4444;
+}
+
+#info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .quiz-container {
+    padding: 20px 15px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  #options button {
+    font-size: 14px;
+    padding: 8px;
+  }
 }
