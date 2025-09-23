@@ -8,21 +8,48 @@
 </head>
 <body>
   <div class="quiz-container">
-    <h1>Welcome to Quiz Game</h1>
-    <input type="text" id="username" placeholder="Enter your name" />
-    <button class="btn" id="start-btn">Start Quiz</button>
+    <h1>🎮 Quiz Game 🎮</h1>
+
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <label>Enter Your Name:</label>
+      <input type="text" id="playerName" placeholder="Your name">
+
+      <label>Choose Category:</label>
+      <select id="category">
+        <option value="gk">General Knowledge</option>
+        <option value="science">Science</option>
+        <option value="sports">Sports</option>
+      </select>
+
+      <label>Choose Difficulty:</label>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="hidden">
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <p id="timer">⏳ Time left: <span id="time">15</span> sec</p>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="result-screen" class="hidden">
+      <h2>🎯 Quiz Completed!</h2>
+      <p id="score"></p>
+      <h3>🏆 Leaderboard</h3>
+      <ol id="leaderboard"></ol>
+      <button onclick="restartQuiz()">Play Again</button>
+    </div>
   </div>
 
-  <script>
-    document.getElementById("start-btn").addEventListener("click", () => {
-      const username = document.getElementById("username").value.trim();
-      if(username === "") {
-        alert("Please enter your name");
-        return;
-      }
-      localStorage.setItem("currentUser", username);
-      window.location.href = "categories.html";
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
