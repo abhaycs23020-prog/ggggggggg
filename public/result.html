@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Result</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Result</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="quiz-container result-box">
-    <h1>Quiz Completed!</h1>
-    <h2>Your Score:</h2>
-    <p id="score-display"></p>
-    <button class="btn" onclick="window.location.href='index.html'">Go Home</button>
-    <button class="btn" onclick="window.location.href='leaderboard.html'">Leaderboard</button>
-  </div>
+<div class="quiz-container">
+  <h1>Quiz Completed!</h1>
+  <p id="score"></p>
+  <h2>Leaderboard</h2>
+  <ol id="leaderboard"></ol>
+  <button class="btn" onclick="window.location.href='category.html'">Play Again</button>
+  <button class="btn" onclick="window.location.href='login.html'">Logout</button>
+</div>
 
-  <script>
-    const lastScore = localStorage.getItem("lastScore") || 0;
-    document.getElementById("score-display").innerText = lastScore;
-  </script>
+<script src="quiz.js"></script>
+<script>
+displayLeaderboard();
+</script>
 </body>
 </html>
