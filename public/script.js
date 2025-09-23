@@ -1,101 +1,159 @@
 const questions = {
   gk: {
-    easy:[{question:"Largest planet?",answers:[{text:"Earth",correct:false},{text:"Jupiter",correct:true},{text:"Mars",correct:false},{text:"Saturn",correct:false}]}],
-    medium:[{question:"Father of Nation?",answers:[{text:"Nehru",correct:false},{text:"Gandhi",correct:true},{text:"Patel",correct:false},{text:"Ambedkar",correct:false}]}],
-    hard:[{question:"National Anthem author?",answers:[{text:"Tagore",correct:true},{text:"Chatterjee",correct:false},{text:"Naidu",correct:false},{text:"Gandhi",correct:false}]}]
+    easy: [
+      { q: "Largest planet?", options: ["Earth", "Jupiter", "Mars", "Saturn"], ans: "Jupiter" },
+      { q: "Capital of India?", options: ["Mumbai", "Delhi", "Kolkata", "Chennai"], ans: "Delhi" }
+    ],
+    medium: [
+      { q: "Who invented telephone?", options: ["Edison", "Bell", "Tesla", "Newton"], ans: "Bell" },
+      { q: "Smallest continent?", options: ["Australia", "Europe", "Antarctica", "Africa"], ans: "Australia" }
+    ],
+    hard: [
+      { q: "Year WW2 ended?", options: ["1942", "1945", "1948", "1950"], ans: "1945" },
+      { q: "First country to send man to space?", options: ["USA", "Russia", "China", "India"], ans: "Russia" }
+    ]
   },
   science: {
-    easy:[{question:"H2O stands for?",answers:[{text:"H2O",correct:true},{text:"O2",correct:false},{text:"CO2",correct:false},{text:"HO2",correct:false}]}],
-    medium:[{question:"Gas plants absorb?",answers:[{text:"Oxygen",correct:false},{text:"Carbon Dioxide",correct:true},{text:"Nitrogen",correct:false},{text:"Hydrogen",correct:false}]}],
-    hard:[{question:"Bones in adult human?",answers:[{text:"206",correct:true},{text:"210",correct:false},{text:"198",correct:false},{text:"250",correct:false}]}]
+    easy: [
+      { q: "H2O is chemical name of?", options: ["Oxygen", "Hydrogen", "Water", "Salt"], ans: "Water" },
+      { q: "Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], ans: "Mars" }
+    ],
+    medium: [
+      { q: "Speed of light?", options: ["3x10^5 m/s", "3x10^8 m/s", "3x10^6 m/s", "3x10^7 m/s"], ans: "3x10^8 m/s" },
+      { q: "Who proposed gravity?", options: ["Einstein", "Newton", "Galileo", "Kepler"], ans: "Newton" }
+    ],
+    hard: [
+      { q: "Atomic number of Carbon?", options: ["5", "6", "7", "8"], ans: "6" },
+      { q: "First artificial satellite?", options: ["Apollo", "Sputnik", "Challenger", "Voyager"], ans: "Sputnik" }
+    ]
   },
-  tech: {
-    easy:[{question:"Who founded Microsoft?",answers:[{text:"Steve Jobs",correct:false},{text:"Bill Gates",correct:true},{text:"Mark Zuckerberg",correct:false},{text:"Elon Musk",correct:false}]}],
-    medium:[{question:"What does HTML stand for?",answers:[{text:"Hyper Text Markup Language",correct:true},{text:"High Text Machine Language",correct:false}]}],
-    hard:[{question:"CPU stands for?",answers:[{text:"Central Processing Unit",correct:true},{text:"Control Processing Unit",correct:false}]}]
-  },
-  history: {
-    easy:[{question:"First US President?",answers:[{text:"George Washington",correct:true},{text:"Abraham Lincoln",correct:false}]}],
-    medium:[{question:"World War II ended in?",answers:[{text:"1945",correct:true},{text:"1939",correct:false}]}],
-    hard:[{question:"India gained independence?",answers:[{text:"1947",correct:true},{text:"1950",correct:false}]}]
+  sports: {
+    easy: [
+      { q: "Players in cricket team?", options: ["9", "10", "11", "12"], ans: "11" },
+      { q: "Which sport uses racket?", options: ["Football", "Tennis", "Hockey", "Golf"], ans: "Tennis" }
+    ],
+    medium: [
+      { q: "First Indian Olympic medal?", options: ["K.D. Jadhav", "Milkha Singh", "P.T. Usha", "Bindra"], ans: "K.D. Jadhav" },
+      { q: "FIFA 2018 winner?", options: ["Brazil", "France", "Germany", "Argentina"], ans: "France" }
+    ],
+    hard: [
+      { q: "Highest ODI run scorer?", options: ["Ponting", "Kohli", "Tendulkar", "Sangakkara"], ans: "Tendulkar" },
+      { q: "Olympics held in India?", options: ["Never", "1952", "1980", "1960"], ans: "Never" }
+    ]
   }
 };
 
-let currentCategory = localStorage.getItem("selectedCategory") || "gk";
-let currentLevel = localStorage.getItem("selectedLevel") || "easy";
-let currentQuestions = [...questions[currentCategory][currentLevel]]; // clone
-let currentQuestionIndex=0;
-let score=0;
-const questionElement=document.getElementById("question");
-const answerButtons=document.getElementById("answer-buttons");
-const nextButton=document.getElementById("next-btn");
-const timerFill=document.getElementById("timer-fill");
-let timer,timeLeft;
+let currentQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let timer;
+let timeLeft;
+let playerName = "";
 
-function startQuiz(){
-  currentQuestionIndex=0;
-  score=0;
-  shuffle(currentQuestions);
+// Start Quiz
+function startQuiz() {
+  playerName = document.getElementById("playerName").value.trim();
+  if (!playerName) {
+    alert("⚠️ Please enter your name!");
+    return;
+  }
+
+  const category = document.getElementById("category").value;
+  const difficulty = document.getElementById("difficulty").value;
+  currentQuestions = questions[category][difficulty];
+  currentIndex = 0;
+  score = 0;
+
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("quiz-screen").classList.remove("hidden");
+
   showQuestion();
-  startTimer();
 }
 
-function showQuestion(){
-  resetState();
-  const q=currentQuestions[currentQuestionIndex];
-  questionElement.innerText=q.question;
-  shuffle(q.answers).forEach(ans=>{
-    const btn=document.createElement("button");
-    btn.innerText=ans.text;
-    btn.classList.add("btn");
-    if(ans.correct) btn.dataset.correct=true;
-    btn.addEventListener("click",selectAnswer);
-    answerButtons.appendChild(btn);
+// Show Question
+function showQuestion() {
+  clearInterval(timer);
+  timeLeft = 15;
+  document.getElementById("time").innerText = timeLeft;
+
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").innerText = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      alert("⏰ Time's up!");
+      nextQuestion();
+    }
+  }, 1000);
+
+  const q = currentQuestions[currentIndex];
+  document.getElementById("question").innerText = q.q;
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(opt, q.ans);
+    optionsDiv.appendChild(btn);
   });
 }
 
-function resetState(){
-  nextButton.style.display="none";
-  while(answerButtons.firstChild) answerButtons.removeChild(answerButtons.firstChild);
-  resetTimer();
+// Check Answer
+function checkAnswer(selected, correct) {
+  clearInterval(timer);
+  if (selected === correct) {
+    score++;
+    alert("✅ Correct!");
+  } else {
+    alert("❌ Wrong! Correct answer: " + correct);
+  }
 }
 
-function selectAnswer(e){
-  const btn=e.target;
-  const correct=btn.dataset.correct==="true";
-  if(correct){btn.classList.add("correct");score++;} else btn.classList.add("wrong");
-  Array.from(answerButtons.children).forEach(b=>b.disabled=true);
-  nextButton.style.display="block";
-  document.getElementById("score") && (document.getElementById("score").innerText="Score: "+score);
+// Next Question
+function nextQuestion() {
+  currentIndex++;
+  if (currentIndex < currentQuestions.length) {
+    showQuestion();
+  } else {
+    endQuiz();
+  }
 }
 
-nextButton && nextButton.addEventListener("click",()=>{
-  currentQuestionIndex++;
-  if(currentQuestionIndex<currentQuestions.length) showQuestion();
-  else showScore();
-});
+// End Quiz + Leaderboard
+function endQuiz() {
+  clearInterval(timer);
+  document.getElementById("quiz-screen").classList.add("hidden");
+  document.getElementById("result-screen").classList.remove("hidden");
+  document.getElementById("score").innerText = `${playerName}, Your Score: ${score}/${currentQuestions.length}`;
 
-function showScore(){
-  let currentUser=localStorage.getItem("currentUser")||"Guest";
-  let leaderboard=JSON.parse(localStorage.getItem("leaderboard"))||[];
-  leaderboard.push({user:currentUser,score:score});
-  leaderboard.sort((a,b)=>b.score-a.score);
-  localStorage.setItem("leaderboard",JSON.stringify(leaderboard));
-  localStorage.setItem("lastScore",score);
-  window.location.href="result.html";
+  saveToLeaderboard(playerName, score);
+  displayLeaderboard();
 }
 
-function startTimer(){
-  timeLeft=15;
-  timerFill.style.width="100%";
-  timer=setInterval(()=>{
-    timeLeft--;
-    timerFill.style.width=(timeLeft/15*100)+"%";
-    if(timeLeft<=0){clearInterval(timer); handleNext();}
-  },1000);
+// Save High Scores
+function saveToLeaderboard(name, score) {
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  leaderboard.push({ name, score });
+  leaderboard.sort((a, b) => b.score - a.score); // highest first
+  leaderboard = leaderboard.slice(0, 5); // top 5 only
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
-function resetTimer(){clearInterval(timer);startTimer();}
-function handleNext(){currentQuestionIndex++;currentQuestionIndex<currentQuestions.length?showQuestion():showScore();}
-function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr;}
-window.addEventListener("load",()=>{if(questionElement) startQuiz();});
+// Show High Scores
+function displayLeaderboard() {
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  const list = document.getElementById("leaderboard");
+  list.innerHTML = "";
+  leaderboard.forEach(entry => {
+    const li = document.createElement("li");
+    li.innerText = `${entry.name} - ${entry.score}`;
+    list.appendChild(li);
+  });
+}
+
+// Restart Quiz
+function restartQuiz() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("start-screen").classList.remove("hidden");
+}
