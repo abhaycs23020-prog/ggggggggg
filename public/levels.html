@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Level</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Level</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Select Difficulty Level</h1>
-    <button class="btn level-btn" data-level="easy">Easy</button>
-    <button class="btn level-btn" data-level="medium">Medium</button>
-    <button class="btn level-btn" data-level="hard">Hard</button>
-  </div>
+<div class="quiz-container">
+  <h1>Select Difficulty Level</h1>
+  <button class="btn" onclick="selectLevel('easy')">Easy</button>
+  <button class="btn" onclick="selectLevel('medium')">Medium</button>
+  <button class="btn" onclick="selectLevel('hard')">Hard</button>
+  <button class="btn" onclick="logout()">Logout</button>
+</div>
 
-  <script>
-    document.querySelectorAll(".level-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        localStorage.setItem("selectedLevel", e.target.dataset.level);
-        window.location.href = "quiz.html";
-      });
-    });
-  </script>
+<script>
+function selectLevel(level) {
+  localStorage.setItem("selectedLevel", level);
+  window.location.href = "quiz.html";
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "login.html";
+}
+</script>
 </body>
 </html>
