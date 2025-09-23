@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Category</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Category</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Select Category</h1>
-    <button class="btn category-btn" data-cat="gk">General Knowledge</button>
-    <button class="btn category-btn" data-cat="science">Science</button>
-    <button class="btn category-btn" data-cat="tech">Technology</button>
-    <button class="btn category-btn" data-cat="history">History</button>
-  </div>
+<div class="quiz-container">
+  <h1>Select Category</h1>
+  <button class="btn" onclick="selectCategory('gk')">General Knowledge</button>
+  <button class="btn" onclick="selectCategory('science')">Science</button>
+  <button class="btn" onclick="selectCategory('sports')">Sports</button>
+  <button class="btn" onclick="logout()">Logout</button>
+</div>
 
-  <script>
-    document.querySelectorAll(".category-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        localStorage.setItem("selectedCategory", e.target.dataset.cat);
-        window.location.href = "levels.html"; // redirect to level selection page
-      });
-    });
-  </script>
+<script>
+function selectCategory(cat) {
+  localStorage.setItem("selectedCategory", cat);
+  window.location.href = "level.html";
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "login.html";
+}
+</script>
 </body>
 </html>
