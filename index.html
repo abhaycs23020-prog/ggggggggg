@@ -9,17 +9,33 @@
   <div class="quiz-container">
     <h1>Quiz Game</h1>
 
-    <!-- Question -->
-    <div id="question">Question text will appear here</div>
+    <!-- Category & Difficulty Selection -->
+    <div id="start-screen">
+      <h3>Select Category:</h3>
+      <select id="category">
+        <option value="gk">General Knowledge</option>
+        <option value="science">Science</option>
+        <option value="tech">Technology</option>
+      </select>
 
-    <!-- Answer Buttons -->
-    <div id="answer-buttons" class="btn-container"></div>
+      <h3>Select Difficulty:</h3>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
 
-    <!-- Next Button -->
-    <button id="next-btn" class="btn">Next</button>
+      <button id="start-btn" class="btn">Start Quiz</button>
+    </div>
 
-    <!-- Score -->
-    <div id="score-container"></div>
+    <!-- Quiz Area -->
+    <div id="quiz-area" style="display:none;">
+      <div id="timer">Time: 45</div>
+      <div id="question">Question text</div>
+      <div id="answer-buttons" class="btn-container"></div>
+      <button id="next-btn" class="btn">Next</button>
+      <div id="score-container"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>
